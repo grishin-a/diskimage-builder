@@ -6,7 +6,7 @@ fi
 set -eu
 set -o pipefail
 
-if [[ $DISTRO_NAME =~ (opensuse|fedora|centos|centos7|rhel|rhel7) ]]; then
+if [[ $DISTRO_NAME =~ (opensuse|fedora|centos|centos7|rhel|rhel7|ubuntu) ]]; then
 
     # Default packages
     _do_py3=0
@@ -75,6 +75,14 @@ if [[ $DISTRO_NAME =~ (opensuse|fedora|centos|centos7|rhel|rhel7) ]]; then
                 tumbleweed)
                     echo "This element is not supported for this platform"
                     exit 1
+                    ;;
+            esac
+            ;;
+        ubuntu)
+            case "$DIB_RELEASE" in
+                focal)
+                    _do_py3=1
+                    packages="python3-virtualenv python3-pip python3-setuptools python3-six python3-wheel"
                     ;;
             esac
             ;;
